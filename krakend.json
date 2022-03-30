@@ -1,0 +1,43 @@
+{
+  "version": 3,
+  "port": 8080,
+  "name": "KrakenD request and response modifier usage example",
+  "host": [
+    "https://reqres.in"
+  ],
+  "plugin": {
+    "pattern": ".so",
+    "folder": "./"
+  },
+  "endpoints": [
+    {
+      "endpoint": "/users",
+      "method": "POST",
+      "output_encoding": "json",
+      "backend": [
+        {
+          "url_pattern": "/api/users",
+          "method": "POST",
+          "encoding": "json",
+          "extra_config": {
+            "plugin/req-resp-modifier": {
+              "name": [
+                "requestBody.Modifier"
+              ],
+              "requestBody.Modifier": {
+                "keys": [
+                  "name",
+                  "language"
+                ],
+                "values": [
+                  "Shipink",
+                  "Golang"
+                ]
+              }
+            }
+          }
+        }
+      ]
+    }
+  ]
+}
